@@ -1,3 +1,36 @@
 {
-  "extends": "next/core-web-vitals"
+	"root": true,
+	"extends": ["custom", "prettier"],
+	"parser": "@typescript-eslint/parser",
+	"rules": {
+		"@typescript-eslint/no-unused-vars": "off",
+		"no-console": "error",
+		"simple-import-sort/imports": [
+			"error",
+			{
+				"groups": [["^@?\\w"], ["^[^.]"], ["^\\."], ["^\\u0000"]]
+			}
+		],
+		"import/first": "error",
+		"import/newline-after-import": "error",
+		"import/no-duplicates": "error",
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{ 
+				"vars": "all", 
+				"varsIgnorePattern": "^_", 
+				"args": "after-used", 
+				"argsIgnorePattern": "^_" 
+			}
+		],
+		"react/jsx-sort-props": "error",
+		"sort-keys-fix/sort-keys-fix": "warn"
+	},
+	"plugins": [
+		"@typescript-eslint",
+		"unused-imports",
+		"simple-import-sort",
+		"sort-keys-fix"
+	]
 }
