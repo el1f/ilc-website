@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 import React from "react";
 
 import { RiderCard } from "@/components/RiderCard";
@@ -22,7 +23,15 @@ const Riders = () => {
 							href="https://ig.me/m/italianlongboardcollective"
 							target="_blank"
 						>
-							<button className="h-12 px-6 font-bold tracking-wide rounded bg-zinc-50 hover:bg-zinc-200 text-zinc-900">
+							<button
+								className="h-12 px-6 font-bold tracking-wide rounded bg-zinc-50 hover:bg-zinc-200 text-zinc-900"
+								onClick={() => {
+									event("lead", {
+										category: "Contact",
+										label: "Add rider",
+									});
+								}}
+							>
 								Add me
 							</button>
 						</Link>

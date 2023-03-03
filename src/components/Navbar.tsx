@@ -12,15 +12,15 @@ export const Navbar = () => {
 				</Link>
 
 				<div className="flex items-center gap-4">
-					<div className="hidden gap-2 md:flex">
+					<div className="gap-2">
 						<Link
-							className="p-2 leading-none rounded-lg hover:bg-zinc-800"
+							className="hidden p-2 leading-none rounded-lg md:inline hover:bg-zinc-800"
 							href="/events"
 						>
 							Meetups
 						</Link>
 						<Link
-							className="p-2 leading-none rounded-lg hover:bg-zinc-800"
+							className="hidden p-2 leading-none rounded-lg md:inline hover:bg-zinc-800"
 							href="/spots"
 						>
 							Spots
@@ -32,7 +32,7 @@ export const Navbar = () => {
 							Riders
 						</Link>
 					</div>
-					<span className="hidden md:block">•</span>
+					<span>•</span>
 					<div className="flex gap-4">
 						<Link
 							className="p-2 leading-none rounded-full hover:bg-zinc-800"

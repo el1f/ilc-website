@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";
 import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import "../styles/globals.css";
 import { PageLayout } from "@/components/PageLayout";
@@ -18,11 +19,14 @@ const spaceGrotesk = Space_Grotesk({
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<div className={`${thunder.variable} ${spaceGrotesk.variable} font-sans`}>
-			<PageLayout>
-				<Component {...pageProps} />
-				<Analytics />
-			</PageLayout>
-		</div>
+		<>
+			<GoogleAnalytics trackPageViews />
+			<div className={`${thunder.variable} ${spaceGrotesk.variable} font-sans`}>
+				<PageLayout>
+					<Component {...pageProps} />
+					<Analytics />
+				</PageLayout>
+			</div>
+		</>
 	);
 }
