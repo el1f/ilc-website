@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 
 import "../styles/globals.css";
+import { PageLayout } from "@/components/PageLayout";
 
 const thunder = localFont({
 	src: "../fonts/thunder/thunder-vf.ttf",
@@ -17,7 +18,9 @@ const spaceGrotesk = Space_Grotesk({
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<div className={`${thunder.variable} ${spaceGrotesk.variable} font-sans`}>
-			<Component {...pageProps} />
+			<PageLayout>
+				<Component {...pageProps} />
+			</PageLayout>
 		</div>
 	);
 }

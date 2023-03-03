@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, CaretLeft, CaretRight, Chat, Path } from "phosphor-react";
@@ -9,8 +8,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar";
 import { RiderCard } from "@/components/RiderCard";
 import { RiderCardMore } from "@/components/RiderCardMore";
 import EVENTS from "@/data/events";
@@ -23,35 +20,6 @@ export default function Home() {
 
 	return (
 		<>
-			<Head>
-				<title>ILC • Italian Longboard Collective</title>
-				<meta
-					name="description"
-					content="We are a self-funded and independent project started by a group of italian riders with the aim of amplifying the voices of some of Italy's best riders and most promising talents, showcasing their skills on a global scale in order to fuel a more vibrant local scene."
-				/>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/brand/logo.svg" />
-				<meta property="og:type" content="website" />
-				<meta
-					property="og:title"
-					content="ILC • Italian Longboard Collective"
-				/>
-				<meta
-					property="og:url"
-					content="https://italianlongboardcollective.com"
-				/>
-				<meta
-					property="og:image"
-					content="https://italianlongboardcollective.com/assets/ilc-og.jpg"
-				/>
-				<meta
-					property="og:description"
-					content="We are a self-funded and independent project started by a group of italian riders with the aim of amplifying the voices of some of Italy's best riders and most promising talents, showcasing their skills on a global scale in order to fuel a more vibrant local scene."
-				></meta>
-			</Head>
-
-			<Navbar />
-
 			<main>
 				<section className="py-64">
 					<div className="container max-w-4xl mx-auto">
@@ -303,8 +271,6 @@ export default function Home() {
 						</div>
 					</div>
 				</section>
-
-				<Footer />
 			</main>
 		</>
 	);

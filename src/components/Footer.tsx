@@ -55,7 +55,8 @@ export const Footer = () => {
 					<p>©2022 Italian Longboard Collective. All rights reserved</p>
 					<Link
 						className="p-2 leading-none rounded-full hover:bg-zinc-800"
-						href="https://google.com"
+						href="https://www.instagram.com/italianlongboardcollective/"
+						target="_blank"
 					>
 						<InstagramLogo className="w-8 h-8" />
 					</Link>
