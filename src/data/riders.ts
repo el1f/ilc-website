@@ -71,6 +71,12 @@ export default [
 		},
 		name: "Marco Ricci",
 	},
+	{
+		city: "Venezia",
+		handle: "andreabenfante",
+		image: "/riders/andreabenfante.jpg",
+		name: "Andrea Benfante",
+	},
 ] as {
 	image?: string;
 	name: string;
