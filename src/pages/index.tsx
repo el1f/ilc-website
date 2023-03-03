@@ -1,25 +1,23 @@
-import { RiderCard } from "@/components/RiderCard";
+import { motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import {
-	Calendar,
-	CaretLeft,
-	CaretRight,
-	Chat,
-	InstagramLogo,
-	Path,
-} from "phosphor-react";
+import { Calendar, CaretLeft, CaretRight, Chat, Path } from "phosphor-react";
+import { useRef, useState } from "react";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
-import { RiderCardMore } from "@/components/RiderCardMore";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { useRef } from "react";
+import { RiderCard } from "@/components/RiderCard";
+import { RiderCardMore } from "@/components/RiderCardMore";
+import EVENTS from "@/data/events";
+import RIDERS from "@/data/riders";
 
 export default function Home() {
+	const [currentSlide, setCurrentSlide] = useState(0);
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
 
@@ -49,67 +47,91 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section id="next-events" className="mb-48">
-					<div className="container max-w-4xl mx-auto">
-						<div className="mb-8 text-center">
-							<h6 className="mb-2 text-lg font-medium uppercase display">
-								MEETUP ALERT ENGAGED
-							</h6>
-							<h2 className="font-extrabold uppercase text-8xl font-display display">
-								Riders. Assemble!
-							</h2>
-						</div>
-						<div className="flex gap-16">
-							<div className="flex-grow-0 bg-zinc-900 flex-shrink-1">
-								<Image
-									className="max-w-sm"
-									src="/events/20230305.png"
-									alt="Hype picture for the event"
-									height={1350}
-									width={1080}
-								/>
+				{EVENTS.length > 0 && (
+					<section id="next-events" className="mb-48">
+						<div className="container max-w-4xl mx-auto">
+							<div className="mb-8 text-center">
+								<h6 className="mb-2 text-lg font-medium uppercase display">
+									MEETUP ALERT ENGAGED
+								</h6>
+								<h2 className="font-extrabold uppercase text-8xl font-display display">
+									Riders. Assemble!
+								</h2>
 							</div>
-							<div className="w-full gap-2 py-8 flex-shrink-1 flex-grow-1">
-								<h5 className="text-2xl tracking-wide uppercase font-display text-zinc-400">
-									05 March 2023
-								</h5>
-								<h3 className="text-5xl font-extrabold uppercase font-display">
-									Meetup Lucio Dalla
-								</h3>
+							<div className="flex flex-col gap-24">
+								{EVENTS.map((event) => (
+									<div key={event.key} className="flex gap-16">
+										<div className="flex-grow-0 bg-zinc-900 flex-shrink-1">
+											<Image
+												className="max-w-sm"
+												src={event.image}
+												alt="Hype picture for the event"
+												height={1350}
+												width={1080}
+											/>
+										</div>
+										<div className="w-full gap-2 py-8 flex-shrink-1 flex-grow-1">
+											<h5 className="text-2xl tracking-wide uppercase font-display text-zinc-400">
+												{event.date.toLocaleDateString()}
+											</h5>
+											<h3 className="text-5xl font-extrabold uppercase font-display">
+												{event.title}
+											</h3>
 
-								<div className="flex flex-col w-full gap-4 mt-4">
-									<Link className="w-full" href="">
-										<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
-											<Calendar className="w-12 h-12" />
+											<div className="flex flex-col w-full gap-4 mt-4">
+												<Link
+													className="w-full"
+													href=""
+													onClick={() =>
+														alert("This hasn't been implemented yet :D")
+													}
+												>
+													<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
+														<Calendar className="w-12 h-12" />
 
-											<div className="flex flex-col">
-												<p className="text-lg">Add event to your calendar</p>
+														<div className="flex flex-col">
+															<p className="text-lg">
+																Add event to your calendar
+															</p>
+														</div>
+													</div>
+												</Link>
+												<Link
+													className="w-full"
+													href="https://ig.me/m/italianlongboardcollective"
+													target="_blank"
+												>
+													<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
+														<Chat className="w-12 h-12" />
+
+														<div className="flex flex-col">
+															<p className="text-lg">Ask for further details</p>
+														</div>
+													</div>
+												</Link>
+												<Link
+													className="w-full"
+													href="https://goo.gl/maps/dcSonfgsUjtNXBTE9"
+													target="_blank"
+												>
+													<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
+														<Path className="w-12 h-12" />
+
+														<div className="flex flex-col">
+															<p className="text-lg">
+																Get directions to the spot
+															</p>
+														</div>
+													</div>
+												</Link>
 											</div>
 										</div>
-									</Link>
-									<Link className="w-full" href="">
-										<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
-											<Chat className="w-12 h-12" />
-
-											<div className="flex flex-col">
-												<p className="text-lg">Ask for further details</p>
-											</div>
-										</div>
-									</Link>
-									<Link className="w-full" href="">
-										<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
-											<Path className="w-12 h-12" />
-
-											<div className="flex flex-col">
-												<p className="text-lg">Get directions to the spot</p>
-											</div>
-										</div>
-									</Link>
-								</div>
+									</div>
+								))}
 							</div>
 						</div>
-					</div>
-				</section>
+					</section>
+				)}
 
 				<section id="mission" className="mb-48">
 					<div className="container flex max-w-6xl gap-12 mx-auto">
@@ -123,14 +145,14 @@ export default function Home() {
 								independent project started by a group of italian riders with
 								the aim of amplifying the voices of some of Italy's best riders
 								and most promising talents, showcasing their skills on a global
-								scale in order to fuel a more vibrant local scene. The homeland
+								scale in order to fuel a more vibrant local scene.
 							</p>
 							<p className="mb-3">
-								of pizza has some surprisingly talented riders that for a reason
-								or another always end up falling behind when it comes to global
-								recognition as well as a widely fragmented landscape of local
-								groups and factions that have a hard time coordinating joint
-								ventures and events.
+								The homeland of pizza has some surprisingly talented riders that
+								for a reason or another always end up falling behind when it
+								comes to global recognition as well as a widely fragmented
+								landscape of local groups and factions that have a hard time
+								coordinating joint ventures and events.
 							</p>
 							<p className="mb-3">We're here to change that.</p>
 						</div>
@@ -155,8 +177,8 @@ export default function Home() {
 								<div className="absolute -left-16 w-[calc(((100vw-1152px)/2)+848px)]">
 									<Swiper
 										navigation={{
-											prevEl: navigationPrevRef.current,
 											nextEl: navigationNextRef.current,
+											prevEl: navigationPrevRef.current,
 										}}
 										onBeforeInit={(swiper) => {
 											if (
@@ -169,43 +191,44 @@ export default function Home() {
 											swiper.params.navigation.nextEl =
 												navigationNextRef.current;
 										}}
+										onRealIndexChange={(swiper) =>
+											setCurrentSlide(swiper.realIndex)
+										}
 										modules={[Navigation]}
-										spaceBetween={40}
+										spaceBetween={0}
 										slidesPerView="auto"
-										onSlideChange={() => console.log("slide change")}
-										onSwiper={(swiper) => console.log(swiper)}
+										className="relative"
 									>
-										<div
-											className="box-content absolute z-10 w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer top-1/2 bg-zinc-900 border-zinc-800"
+										<motion.div
+											animate={{
+												scale: currentSlide === 0 ? 0 : 1,
+											}}
+											className="box-content absolute z-20 w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer top-1/2 bg-zinc-900 border-zinc-800"
 											ref={navigationPrevRef}
 											onClick={(e) => e.preventDefault()}
 										>
 											<CaretLeft className="w-8 h-8" />
-										</div>
+										</motion.div>
 										<div
-											className="box-content absolute z-10 w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer right-6 top-1/2 bg-zinc-900 border-zinc-800"
+											className="box-content absolute z-20 w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer right-6 top-1/2 bg-zinc-900 border-zinc-800"
 											ref={navigationNextRef}
 											onClick={(e) => e.preventDefault()}
 										>
 											<CaretRight className="w-8 h-8" />
 										</div>
-
-										<SwiperSlide className="!w-auto">
-											<div className="w-4" />
-										</SwiperSlide>
-										<SwiperSlide className="!w-auto">
-											<RiderCard />
-										</SwiperSlide>
-										<SwiperSlide className="!w-auto">
-											<RiderCard />
-										</SwiperSlide>
-										<SwiperSlide className="!w-auto">
-											<RiderCard />
-										</SwiperSlide>
-										<SwiperSlide className="!w-auto">
-											<RiderCard />
-										</SwiperSlide>
-										<SwiperSlide className="!w-auto">
+										<div className="absolute top-0 left-0 z-10 w-16 h-full bg-gradient-to-r from-black to-black/0" />
+										{RIDERS.map((rider) => (
+											<SwiperSlide key={rider.handle} className="!w-auto pl-16">
+												<motion.div>
+													<RiderCard
+														image={rider.image}
+														name={rider.name}
+														city={rider.city}
+													/>
+												</motion.div>
+											</SwiperSlide>
+										))}
+										<SwiperSlide className="!w-auto pl-16">
 											<RiderCardMore />
 										</SwiperSlide>
 										<SwiperSlide className="!w-auto">

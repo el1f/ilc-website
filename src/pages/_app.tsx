@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
-import localFont from "next/font/local";
-import "../styles/globals.css";
 import { Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
+
+import "../styles/globals.css";
 
 const thunder = localFont({
 	src: "../fonts/thunder/thunder-vf.ttf",

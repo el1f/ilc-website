@@ -5,12 +5,12 @@ export const RiderCardMore = () => {
 	return (
 		<div className="flex flex-col gap-3 p-2 border border-solid rounded-lg w-80 bg-zinc-900 border-zinc-800">
 			<Image
-				src="/riders/lgbdsebs.jpg"
+				src="/riders/placeholder.png"
 				alt="Sebastian Francesconi"
 				style={{
-					objectFit: "cover",
 					aspectRatio: 1080 / 1350,
 					display: "block",
+					objectFit: "cover",
 				}}
 				width={540}
 				height={675}
