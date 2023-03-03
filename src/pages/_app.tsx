@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";
 import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<div className={`${thunder.variable} ${spaceGrotesk.variable} font-sans`}>
 			<PageLayout>
 				<Component {...pageProps} />
+				<Analytics />
 			</PageLayout>
 		</div>
 	);
