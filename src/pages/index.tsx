@@ -42,7 +42,7 @@ export default function Home() {
 				/>
 				<meta
 					property="og:image"
-					content="https://italianlongboardcollective.com/assets/ilc-og.png"
+					content="https://italianlongboardcollective.com/assets/ilc-og.jpg"
 				/>
 				<meta
 					property="og:description"
@@ -55,15 +55,18 @@ export default function Home() {
 			<main>
 				<section className="py-64">
 					<div className="container max-w-4xl mx-auto">
-						<h2 className="font-display uppercase font-black text-[75.3vw] leading-[0.75] min-[896px]:text-[676px]">
+						<h2 className="font-display uppercase font-extrabold text-[75.3vw] leading-[0.75] min-[896px]:text-[676px] opacity-0 absolute">
 							Ciao
 						</h2>
-						<h1 className="font-display uppercase font-black flex flex-col text-[22.8vw] text-justify leading-[0.75] min-[896px]:text-[204.3px]">
-							<span className="tracking-[1.2vw] min-[896px]:tracking-[10.9px]">
-								introducing
-							</span>
-							italy's finest longboarders
+						<h1 className="font-display uppercase font-extrabold flex flex-col text-[20.5vw] text-justify leading-[0.75] min-[896px]:text-[204.3px] opacity-0 absolute">
+							introducing italy's finest longboarders
 						</h1>
+						<div className="relative w-full aspect-[320/176] mb-16">
+							<Image src="/assets/ciao.svg" alt="Ciao" fill />
+						</div>
+						<div className="relative w-full aspect-[320/164]">
+							<Image src="/assets/heading.svg" alt="Abstract" fill />
+						</div>
 					</div>
 				</section>
 
