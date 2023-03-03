@@ -48,10 +48,10 @@ export default function Home() {
 				</section>
 
 				{EVENTS.length > 0 && (
-					<section id="next-events" className="mb-48">
+					<section id="next-events" className="px-6 mb-48">
 						<div className="container max-w-4xl mx-auto">
 							<div className="mb-8 text-center">
-								<h6 className="mb-2 text-lg font-medium uppercase display">
+								<h6 className="mb-2 text-lg font-medium uppercase opacity-50 display">
 									MEETUP ALERT ENGAGED
 								</h6>
 								<h2 className="font-extrabold uppercase text-8xl font-display display">
@@ -60,17 +60,18 @@ export default function Home() {
 							</div>
 							<div className="flex flex-col gap-24">
 								{EVENTS.map((event) => (
-									<div key={event.key} className="flex gap-16">
-										<div className="flex-grow-0 bg-zinc-900 flex-shrink-1">
+									<div
+										key={event.key}
+										className="flex flex-col gap-8 md:gap-16 md:flex-row"
+									>
+										<div className="flex-grow-0 bg-zinc-900 flex-shrink-0 w-full max-w-sm aspect-[1080/1350] relative">
 											<Image
-												className="max-w-sm"
 												src={event.image}
 												alt="Hype picture for the event"
-												height={1350}
-												width={1080}
+												fill
 											/>
 										</div>
-										<div className="w-full gap-2 py-8 flex-shrink-1 flex-grow-1">
+										<div className="w-full gap-2 md:py-8 flex-shrink-1 flex-grow-1">
 											<h5 className="text-2xl tracking-wide uppercase font-display text-zinc-400">
 												{event.date.toLocaleDateString()}
 											</h5>
@@ -133,9 +134,9 @@ export default function Home() {
 					</section>
 				)}
 
-				<section id="mission" className="mb-48">
-					<div className="container flex max-w-6xl gap-12 mx-auto">
-						<h2 className="flex-shrink-0 w-full max-w-xs text-5xl font-extrabold uppercase font-display">
+				<section id="mission" className="px-6 mb-48">
+					<div className="container flex flex-col max-w-6xl gap-5 mx-auto md:gap-12 md:flex-row">
+						<h2 className="flex-shrink-0 w-full text-5xl font-extrabold uppercase md:max-w-xs font-display">
 							putting the Italian longboarding scene under the spotlight
 						</h2>
 
@@ -159,9 +160,9 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section id="riders" className="mb-48">
-					<div className="container flex max-w-6xl gap-12 mx-auto flex-nowrap">
-						<h2 className="flex-shrink-0 w-full max-w-xs text-5xl font-extrabold uppercase font-display">
+				<section id="riders" className="px-6 mb-48 overflow-hidden">
+					<div className="container flex flex-col max-w-6xl gap-5 mx-auto md:gap-12 md:flex-row flex-nowrap">
+						<h2 className="flex-shrink-0 w-full text-5xl font-extrabold uppercase md:max-w-xs font-display">
 							Meet our wonderfully talented riders
 						</h2>
 
@@ -173,8 +174,8 @@ export default function Home() {
 								longboarding with even more people. These are a few of them.
 							</p>
 
-							<div className="relative flex gap-8 mt-4 flex-nowrap h-96">
-								<div className="absolute -left-16 w-[calc(((100vw-1152px)/2)+848px)]">
+							<div className="relative flex gap-8 mt-4 flex-nowrap h-[480px]">
+								<div className="absolute -left-6 md:-left-16 w-[calc(100vw+48px)] md:w-[calc(((100vw-1152px)/2)+848px)]">
 									<Swiper
 										navigation={{
 											nextEl: navigationNextRef.current,
@@ -203,22 +204,25 @@ export default function Home() {
 											animate={{
 												scale: currentSlide === 0 ? 0 : 1,
 											}}
-											className="box-content absolute z-20 w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer top-1/2 bg-zinc-900 border-zinc-800"
+											className="box-content absolute z-20 hidden w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer top-1/2 bg-zinc-900 border-zinc-800 md:block"
 											ref={navigationPrevRef}
 											onClick={(e) => e.preventDefault()}
 										>
 											<CaretLeft className="w-8 h-8" />
 										</motion.div>
 										<div
-											className="box-content absolute z-20 w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer right-6 top-1/2 bg-zinc-900 border-zinc-800"
+											className="box-content absolute z-20 hidden w-8 h-8 p-2 -translate-y-1/2 border rounded-full cursor-pointer right-6 top-1/2 bg-zinc-900 border-zinc-800 md:block"
 											ref={navigationNextRef}
 											onClick={(e) => e.preventDefault()}
 										>
 											<CaretRight className="w-8 h-8" />
 										</div>
-										<div className="absolute top-0 left-0 z-10 w-16 h-full bg-gradient-to-r from-black to-black/0" />
+										<div className="absolute top-0 left-0 z-10 hidden w-16 h-full bg-gradient-to-r from-black to-black/0 md:block" />
 										{RIDERS.map((rider) => (
-											<SwiperSlide key={rider.handle} className="!w-auto pl-16">
+											<SwiperSlide
+												key={rider.handle}
+												className="!w-auto md:pl-16 pl-6"
+											>
 												<motion.div>
 													<RiderCard
 														image={rider.image}
@@ -228,7 +232,7 @@ export default function Home() {
 												</motion.div>
 											</SwiperSlide>
 										))}
-										<SwiperSlide className="!w-auto pl-16">
+										<SwiperSlide className="!w-auto md:pl-16 pl-6">
 											<RiderCardMore />
 										</SwiperSlide>
 										<SwiperSlide className="!w-auto">
@@ -241,9 +245,9 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section id="spots" className="mb-48">
-					<div className="container flex max-w-6xl gap-12 mx-auto flex-nowrap">
-						<h2 className="flex-shrink-0 w-full max-w-xs text-5xl font-extrabold uppercase font-display">
+				<section id="spots" className="px-6 mb-48">
+					<div className="container flex flex-col max-w-6xl gap-5 mx-auto md:gap-12 md:flex-row flex-nowrap">
+						<h2 className="flex-shrink-0 w-full text-5xl font-extrabold uppercase md:max-w-xs font-display">
 							Discover Italy through a brand new lens
 						</h2>
 

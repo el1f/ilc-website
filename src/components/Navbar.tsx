@@ -1,16 +1,16 @@
-import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 import { InstagramLogo } from "phosphor-react";
+import React from "react";
 
 export const Navbar = () => {
 	return (
-		<header className="fixed z-10 w-full py-8">
-			<nav className="container z-50 flex content-center justify-between w-full h-20 max-w-4xl p-6 mx-auto font-medium border rounded-full shadow-xl bg-zinc-900 border-zinc-800 top-16">
+		<header className="fixed z-10 w-full p-4 md:py-8">
+			<nav className="container z-50 flex content-center justify-between w-full h-20 max-w-4xl p-6 mx-auto font-medium border rounded-full shadow-xl bg-zinc-900 border-zinc-800 md:top-16">
 				<Image src="/brand/logo.svg" alt="logo" height={40} width={40} />
 
 				<div className="flex items-center gap-4">
-					<div className="flex gap-2">
+					<div className="hidden gap-2 md:flex">
 						<Link
 							className="p-2 leading-none rounded-lg hover:bg-zinc-800"
 							href="/events"
@@ -30,7 +30,7 @@ export const Navbar = () => {
 							Riders
 						</Link>
 					</div>
-					<span>•</span>
+					<span className="hidden md:block">•</span>
 					<div className="flex gap-4">
 						<Link
 							className="p-2 leading-none rounded-full hover:bg-zinc-800"

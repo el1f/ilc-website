@@ -65,7 +65,7 @@ export default [
 	{
 		city: "Rimini",
 		handle: "chisioleggiadro",
-		image: null,
+		image: "/riders/chisioleggiadro.jpg",
 		links: {
 			INSTAGRAM: "https://www.instagram.com/chisioleggiadro/",
 		},
