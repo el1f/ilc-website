@@ -1,20 +1,59 @@
+import Head from "next/head";
+import Link from "next/link";
 import React from "react";
+
+import { RiderCard } from "@/components/RiderCard";
+import RIDERS from "@/data/riders";
 
 const Riders = () => {
 	return (
-		<main>
-			<section className="px-6 py-40 md:py-64 md:px-0">
-				<header className="container max-w-4xl mx-auto">
-					<h1 className="mb-4 text-6xl font-extrabold uppercase font-display">
-						Riders
-					</h1>
-					<p className="text-lg">
-						Work on this page is still in progress. Make sure to come back soon
-						to check it out
+		<>
+			<Head>
+				<title>ILC • Riders</title>
+			</Head>
+			<div className="px-6 py-40 md:py-64">
+				<header className="container max-w-4xl mx-auto mb-16">
+					<div className="flex justify-between">
+						<h1 className="mb-4 text-6xl font-extrabold uppercase font-display">
+							Riders
+						</h1>
+
+						<Link
+							href="https://ig.me/m/italianlongboardcollective"
+							target="_blank"
+						>
+							<button className="h-12 px-6 font-bold tracking-wide rounded bg-zinc-50 hover:bg-zinc-200 text-zinc-900">
+								Add me
+							</button>
+						</Link>
+					</div>
+					<p className="mb-2">
+						Introducing the riders of the Italian Longboard Collective! Each has
+						their own unique style, skill level, interests and personality for
+						you to discover!
+					</p>
+					<p>
+						We're passionate about longboarding and always excited to meet new
+						riders who share our love for the sport. So if you're a longboarder
+						in Italy looking for a welcoming and supportive community, come join
+						us! Let's shred together and showcase the awesomeness of the Italian
+						longboarding scene!
 					</p>
 				</header>
-			</section>
-		</main>
+
+				<main className="container grid max-w-5xl grid-cols-1 gap-8 mx-auto justify-items-center sm:grid-cols-2 lg:grid-cols-3">
+					{RIDERS.map((rider) => (
+						// <motion.div>
+						<RiderCard
+							image={rider.image}
+							name={rider.name}
+							city={rider.city}
+						/>
+						// </motion.div>
+					))}
+				</main>
+			</div>
+		</>
 	);
 };
 
