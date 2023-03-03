@@ -11,9 +11,6 @@
 				"groups": [["^@?\\w"], ["^[^.]"], ["^\\."], ["^\\u0000"]]
 			}
 		],
-		"import/first": "error",
-		"import/newline-after-import": "error",
-		"import/no-duplicates": "error",
 		"unused-imports/no-unused-imports": "error",
 		"unused-imports/no-unused-vars": [
 			"warn",
@@ -24,7 +21,6 @@
 				"argsIgnorePattern": "^_" 
 			}
 		],
-		"react/jsx-sort-props": "error",
 		"sort-keys-fix/sort-keys-fix": "warn"
 	},
 	"plugins": [
