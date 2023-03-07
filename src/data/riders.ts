@@ -5,7 +5,7 @@ export default (
 		{
 			city: "Lucca",
 			disciplines: ["DANCING", "FREESTYLE"],
-			handle: "lgbdsebs",
+			handle: "lgbd_sebs",
 			image: "/riders/lgbdsebs.jpg",
 			links: {
 				INSTAGRAM: "https://www.instagram.com/lgbdsebs/",

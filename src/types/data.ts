@@ -16,19 +16,30 @@ export interface Event {
 	coordinates: [lat: number, lon: number];
 	presentRiders?: string[];
 	gallery?: Picture[];
-	links?: {
-		href: string;
-		label: string;
-		platform: string;
-		author: string;
-	}[];
-	attachments?: {
-		href: string;
-		label: string;
-		platform: string;
-		author: string;
-	}[];
+	links?: EventLink[];
+	attachments?: EventAttachment[];
 	spotId?: string;
+}
+
+export type LinkType = "INSTAGRAM" | "WEB" | "DRIVE";
+
+export interface EventLink {
+	href: string;
+	label: string;
+	type: LinkType;
+	author: string;
+	authorLink?: string;
+}
+
+export type AttachmentType = "PDF" | "IMAGE";
+
+export interface EventAttachment {
+	href: string;
+	label: string;
+	type: AttachmentType;
+	author: string;
+	authorLink?: string;
+	size: number;
 }
 
 export interface Rider {
