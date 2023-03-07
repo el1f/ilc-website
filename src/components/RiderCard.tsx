@@ -1,5 +1,6 @@
-import Image from "next/image";
 import React from "react";
+
+import { ImageWithFallback } from "./ImageWithFallback";
 
 interface RiderCardProps {
 	image?: string;
@@ -10,7 +11,7 @@ interface RiderCardProps {
 export const RiderCard: React.FC<RiderCardProps> = ({ image, name, city }) => {
 	return (
 		<div className="flex flex-col gap-3 p-2 border border-solid rounded-lg w-80 bg-zinc-900 border-zinc-800">
-			<Image
+			<ImageWithFallback
 				src={image ?? "/riders/placeholder.png"}
 				alt={`Picture of ${name}`}
 				style={{

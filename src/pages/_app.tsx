@@ -1,10 +1,12 @@
 import { Analytics } from "@vercel/analytics/react";
+import dayjs from "dayjs";
 import type { AppProps } from "next/app";
 import { Space_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import "../styles/globals.css";
+import "dayjs/locale/it";
 import { PageLayout } from "@/components/PageLayout";
 
 const thunder = localFont({
@@ -16,6 +18,8 @@ const spaceGrotesk = Space_Grotesk({
 	subsets: ["latin"],
 	variable: "--font-space-grotesk",
 });
+
+dayjs.locale("it");
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (

@@ -6,6 +6,7 @@ export default [
 		image: "/events/20230305.png",
 		key: "BO001",
 		location: "Piazza Lucio Dalla, Bologna",
+		slug: "20230305-bologna",
 		title: "Meetup Lucio Dalla",
 	},
 	// {
@@ -18,6 +19,7 @@ export default [
 	// 	title: "Meetup Lucio Dalla",
 	// },
 ] as {
+	slug: string;
 	key: string;
 	image: string;
 	title: string;

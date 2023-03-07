@@ -1,17 +1,22 @@
+import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { Calendar, CaretLeft, CaretRight, Chat, Path } from "phosphor-react";
+import { CaretLeft, CaretRight } from "phosphor-react";
 import { useRef, useState } from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { EventCard } from "@/components/EventCard";
 import { RiderCard } from "@/components/RiderCard";
 import { RiderCardMore } from "@/components/RiderCardMore";
 import EVENTS from "@/data/events";
 import RIDERS from "@/data/riders";
+
+const UPCOMING_EVENTS = EVENTS.filter((event) => {
+	return dayjs(event.date).isAfter(dayjs());
+});
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -38,7 +43,7 @@ export default function Home() {
 					</div>
 				</section>
 
-				{EVENTS.length > 0 && (
+				{UPCOMING_EVENTS.length > 0 && (
 					<section id="next-events" className="px-6 mb-48">
 						<div className="container max-w-4xl mx-auto">
 							<div className="mb-8 text-center">
@@ -50,75 +55,16 @@ export default function Home() {
 								</h2>
 							</div>
 							<div className="flex flex-col gap-24">
-								{EVENTS.map((event) => (
-									<div
-										key={event.key}
-										className="flex flex-col gap-8 md:gap-16 md:flex-row"
-									>
-										<div className="flex-grow-0 bg-zinc-900 flex-shrink-0 w-full max-w-sm aspect-[1080/1350] relative">
-											<Image
-												src={event.image}
-												alt="Hype picture for the event"
-												fill
-											/>
-										</div>
-										<div className="w-full gap-2 md:py-8 flex-shrink-1 flex-grow-1">
-											<h5 className="text-2xl tracking-wide uppercase font-display text-zinc-400">
-												{event.date.toLocaleDateString()}
-											</h5>
-											<h3 className="text-5xl font-extrabold uppercase font-display">
-												{event.title}
-											</h3>
-
-											<div className="flex flex-col w-full gap-4 mt-4">
-												<Link
-													className="w-full"
-													href=""
-													onClick={() =>
-														alert("This hasn't been implemented yet :D")
-													}
-												>
-													<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
-														<Calendar className="w-12 h-12" />
-
-														<div className="flex flex-col">
-															<p className="text-lg">
-																Add event to your calendar
-															</p>
-														</div>
-													</div>
-												</Link>
-												<Link
-													className="w-full"
-													href="https://ig.me/m/italianlongboardcollective"
-													target="_blank"
-												>
-													<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
-														<Chat className="w-12 h-12" />
-
-														<div className="flex flex-col">
-															<p className="text-lg">Ask for further details</p>
-														</div>
-													</div>
-												</Link>
-												<Link
-													className="w-full"
-													href="https://goo.gl/maps/dcSonfgsUjtNXBTE9"
-													target="_blank"
-												>
-													<div className="flex items-center gap-4 p-4 border rounded-lg border-zinc-600">
-														<Path className="w-12 h-12" />
-
-														<div className="flex flex-col">
-															<p className="text-lg">
-																Get directions to the spot
-															</p>
-														</div>
-													</div>
-												</Link>
-											</div>
-										</div>
-									</div>
+								{UPCOMING_EVENTS.map((event) => (
+									<EventCard
+										key={event.title}
+										image={event.image}
+										title={event.title}
+										date={event.date}
+										location={event.location}
+										address={event.address}
+										coordinates={event.coordinates}
+									/>
 								))}
 							</div>
 						</div>
