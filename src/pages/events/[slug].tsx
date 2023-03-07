@@ -7,6 +7,8 @@ import Link from "next/link";
 import {
 	Calendar,
 	CaretDown,
+	CaretLeft,
+	CaretRight,
 	CaretUp,
 	Chat,
 	FileImage,
@@ -185,7 +187,7 @@ const Event: NextPage<{
 								{`${dayjs(event.date).format("DD MMM YYYY")} • 
 								${event.location}`.toUpperCase()}
 							</p> */}
-							<h1 className="mb-4 font-extrabold uppercase text-[160px] leading-none font-display">
+							<h1 className="mb-4 font-extrabold uppercase text-8xl md:text-[160px] leading-none font-display">
 								{event.title}
 							</h1>
 						</div>
@@ -194,7 +196,7 @@ const Event: NextPage<{
 
 				{!isPast && (
 					<section className="px-6 mb-8 md:md-16 md:px-0" id="actions">
-						<div className="container grid max-w-4xl grid-cols-3 gap-4 mx-auto mb-32">
+						<div className="container grid max-w-4xl grid-cols-1 gap-4 mx-auto mb-32 md:grid-cols-3">
 							<EventAction
 								label="Add event to your calendar"
 								icon={<Calendar className="w-12 h-12" />}
@@ -216,12 +218,12 @@ const Event: NextPage<{
 
 				<section className="px-6 mb-8 md:md-16 md:px-0" id="riders">
 					<div className="container max-w-6xl grid-cols-3 mx-auto mb-32">
-						<div className="flex justify-between">
-							<h3 className="mb-4 text-6xl font-bold uppercase font-display">
-								Present Riders
+						<div className="flex items-center justify-between mb-6">
+							<h3 className="text-4xl font-bold leading-none uppercase md:text-6xl font-display">
+								Known Riders
 							</h3>
 							<button
-								className="flex items-center h-12 gap-2 px-6 font-bold tracking-wide border rounded border-zinc-500 hover:border-zinc-400 text-zinc-500 hover:text-zinc-50 tabular-nums"
+								className="items-center hidden h-12 gap-2 px-6 font-bold tracking-wide border rounded md:flex border-zinc-500 hover:border-zinc-400 text-zinc-500 hover:text-zinc-50 tabular-nums"
 								onClick={() => {
 									setIsRiderExtended(!isRidersExtended);
 								}}
@@ -243,14 +245,28 @@ const Event: NextPage<{
 									dynamic
 								/>
 							))}
+
+							<button
+								className="flex items-center justify-center h-12 gap-2 px-6 font-bold tracking-wide border rounded border-zinc-500 hover:border-zinc-400 text-zinc-500 hover:text-zinc-50 tabular-nums"
+								onClick={() => {
+									setIsRiderExtended(!isRidersExtended);
+								}}
+							>
+								{isRidersExtended ? (
+									<CaretUp className="w-5 h-5" />
+								) : (
+									<CaretDown className="w-5 h-5" />
+								)}
+								{isRidersExtended ? "Show less" : "Show all"}
+							</button>
 						</div>
 					</div>
 				</section>
 
 				<section className="px-6 mb-8 md:md-16 md:px-0" id="content">
-					<div className="container grid max-w-6xl grid-cols-3 gap-12 mx-auto mb-32">
+					<div className="container grid max-w-6xl mx-auto mb-32 md:gap-12 md:grid-cols-3">
 						<aside>
-							<section className="mb-16">
+							<section className="mb-8 md:mb-16">
 								<h3 className="mb-4 text-4xl font-bold uppercase font-display">
 									Attachments
 								</h3>
@@ -272,7 +288,7 @@ const Event: NextPage<{
 								</div>
 							</section>
 
-							<section>
+							<section className="mb-8 md:mb-16">
 								<h3 className="mb-4 text-4xl font-bold uppercase font-display">
 									Links
 								</h3>
@@ -295,11 +311,14 @@ const Event: NextPage<{
 						<section
 							ref={galleryRef}
 							id="gallery"
-							className="flex flex-col col-span-2"
+							className="flex flex-col md:col-span-2"
 						>
 							<div className="flex justify-between">
 								<h3 className="mb-4 text-4xl font-bold uppercase font-display">
 									Gallery
+									<small className="text-zinc-400">{` / P${
+										galleryPage + 1
+									}`}</small>
 								</h3>
 							</div>
 
@@ -314,7 +333,7 @@ const Event: NextPage<{
 								</p>
 							</div>
 
-							<div className="grid w-full grid-cols-3 gap-6 mb-4">
+							<div className="grid w-full gap-6 mb-4 md:grid-cols-3">
 								{gallery?.pictures
 									.slice(
 										galleryPage * PAGE_SIZE,
@@ -332,7 +351,8 @@ const Event: NextPage<{
 									))}
 							</div>
 
-							<div className="flex gap-2 ml-auto">
+							{/* Desktop pagination */}
+							<div className="hidden gap-2 ml-auto md:flex">
 								{[
 									...new Array(
 										Math.ceil((gallery?.pictures.length ?? 0) / PAGE_SIZE),
@@ -351,6 +371,32 @@ const Event: NextPage<{
 										{i + 1}
 									</button>
 								))}
+							</div>
+
+							{/* Mobile pagination */}
+							<div className="flex gap-2 ml-auto md:hidden">
+								<button
+									onClick={() => {
+										setGalleryPage(galleryPage - 1);
+										executeScroll();
+									}}
+									className={clsx(
+										"w-10 h-10 text-sm border rounded-full border-zinc-400",
+									)}
+								>
+									<CaretLeft className="w-6 h-6 mx-auto" />
+								</button>
+								<button
+									onClick={() => {
+										setGalleryPage(galleryPage + 1);
+										executeScroll();
+									}}
+									className={clsx(
+										"w-10 h-10 text-sm border rounded-full border-zinc-400",
+									)}
+								>
+									<CaretRight className="w-6 h-6 mx-auto" />
+								</button>
 							</div>
 						</section>
 					</div>

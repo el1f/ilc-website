@@ -14,7 +14,7 @@ export const Navbar = () => {
 				<div className="flex items-center gap-4">
 					<div className="gap-2">
 						<Link
-							className="hidden p-2 leading-none rounded-lg md:inline hover:bg-zinc-800"
+							className="p-2 leading-none rounded-lg hover:bg-zinc-800"
 							href="/events"
 						>
 							Meetups
