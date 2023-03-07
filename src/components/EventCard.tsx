@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Calendar, Chat, MapPin, Path } from "phosphor-react";
 import React from "react";
 
+import { getDirectionsLink } from "@/helpers/getDirectionsLink";
+
 import { ImageWithFallback } from "./ImageWithFallback";
 
 export interface EventCardProps {
@@ -53,9 +55,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 	coordinates,
 	isPast = false,
 }) => {
-	const coordsDirectionsLink = `https://www.google.com/maps/search/?api=1&query=${
-		!address ? encodeURIComponent(coordinates.join(",") ?? "") : ""
-	}${encodeURIComponent(address ?? "")}`;
+	const coordsDirectionsLink = getDirectionsLink(coordinates, address);
 
 	return (
 		<div
