@@ -42,6 +42,13 @@ export interface EventAttachment {
 	size: number;
 }
 
+export interface EventImage {
+	id: string;
+	thumbnail: string;
+	lightbox: string;
+	download: string;
+}
+
 export interface Rider {
 	image?: string;
 	name: string;

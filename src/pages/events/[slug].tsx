@@ -1,3 +1,4 @@
+import { Dialog, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
@@ -18,7 +19,7 @@ import {
 	InstagramLogo,
 	Path,
 } from "phosphor-react";
-import React, { useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import useSwr from "swr";
 
 import { ImageWithFallback } from "@/components/ImageWithFallback";
@@ -29,6 +30,7 @@ import { getDirectionsLink } from "@/helpers/getDirectionsLink";
 import {
 	Event as EventData,
 	EventAttachment,
+	EventImage,
 	EventLink,
 	Rider,
 } from "@/types/data";
@@ -148,12 +150,13 @@ const Event: NextPage<{
 		error: galleryError,
 		isLoading: isGalleryLoading,
 	} = useSwr<{
-		pictures: string[];
+		pictures: EventImage[];
 	}>("/api/event/gallery", fetcher);
 	const galleryRef = useRef<HTMLDivElement>(null);
 
 	const [isRidersExtended, setIsRiderExtended] = useState(false);
 	const [galleryPage, setGalleryPage] = useState(0);
+	const [activeImage, setActiveImage] = useState<EventImage | null>(null);
 	const pageEnd = (galleryPage + 1) * PAGE_SIZE;
 
 	const isPast = dayjs(event.date).isBefore(dayjs());
@@ -247,7 +250,7 @@ const Event: NextPage<{
 							))}
 
 							<button
-								className="flex items-center justify-center h-12 gap-2 px-6 font-bold tracking-wide border rounded border-zinc-500 hover:border-zinc-400 text-zinc-500 hover:text-zinc-50 tabular-nums"
+								className="flex items-center justify-center h-12 gap-2 px-6 font-bold tracking-wide border rounded border-zinc-500 hover:border-zinc-400 text-zinc-500 hover:text-zinc-50 tabular-nums md:hidden"
 								onClick={() => {
 									setIsRiderExtended(!isRidersExtended);
 								}}
@@ -341,12 +344,15 @@ const Event: NextPage<{
 											? gallery?.pictures.length
 											: pageEnd,
 									)
-									.map((href) => (
+									.map((image) => (
 										<div
-											key={href}
-											className="relative w-full aspect-[4/3] bg-zinc-900 rounded overflow-hidden"
+											key={image.id}
+											className="relative w-full aspect-[4/3] bg-zinc-900 rounded overflow-hidden cursor-pointer hover:scale-105 transition"
+											onClick={() => {
+												setActiveImage(image);
+											}}
 										>
-											<Image src={href} alt="" fill />
+											<Image src={image.thumbnail} alt="" fill />
 										</div>
 									))}
 							</div>
@@ -402,6 +408,59 @@ const Event: NextPage<{
 					</div>
 				</section>
 			</main>
+
+			<Transition appear show={Boolean(activeImage)} as={Fragment}>
+				<Dialog
+					as="div"
+					className="relative z-10"
+					onClose={() => setActiveImage(null)}
+				>
+					<Transition.Child
+						as={Fragment}
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
+					>
+						<div className="fixed inset-0 bg-black bg-opacity-25" />
+					</Transition.Child>
+
+					<div className="fixed inset-0 overflow-y-auto">
+						<div className="relative flex items-center justify-center h-screen min-h-full text-center pt-28 md:pt-16 md:p-16">
+							<Transition.Child
+								as={Fragment}
+								enter="ease-out duration-300"
+								enterFrom="opacity-0 scale-95"
+								enterTo="opacity-100 scale-100"
+								leave="ease-in duration-200"
+								leaveFrom="opacity-100 scale-100"
+								leaveTo="opacity-0 scale-95"
+							>
+								<Dialog.Panel className="relative w-screen min-h-full transition-all transform bg-zinc-900 rounded-2xl">
+									<a
+										className="absolute z-20 flex items-center h-12 px-6 font-sans font-bold tracking-wide rounded top-4 right-4 bg-zinc-50 hover:bg-zinc-200 text-zinc-900"
+										href={activeImage?.download}
+										download={true}
+										target="_blank"
+									>
+										Download Picture
+									</a>
+									<Image
+										src={activeImage?.lightbox ?? ""}
+										style={{
+											objectFit: "contain",
+										}}
+										alt=""
+										fill
+									/>
+								</Dialog.Panel>
+							</Transition.Child>
+						</div>
+					</div>
+				</Dialog>
+			</Transition>
 		</>
 	);
 };

@@ -1,8 +1,10 @@
 import { v2 as cloudinary } from "cloudinary";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+import { EventImage } from "@/types/data";
+
 type Data = {
-	pictures: string[];
+	pictures: EventImage[];
 };
 
 export default async function handler(
@@ -24,13 +26,23 @@ export default async function handler(
 			})
 			.then((res) => {
 				return res.resources.map((resource) => {
-					const image = cloudinary.url(resource.public_id, {
+					const thumbnail = cloudinary.url(resource.public_id, {
 						crop: "thumb",
 						height: 180 * 2,
 						width: 240 * 2,
 					});
 
-					return image;
+					const lightbox = cloudinary.url(resource.public_id, {
+						crop: "thumb",
+						width: 1920,
+					});
+
+					return {
+						download: resource.secure_url,
+						id: resource.public_id,
+						lightbox,
+						thumbnail,
+					};
 				});
 			});
 
