@@ -48,7 +48,7 @@ export default async function handler(
 
 		res.status(200).json({ pictures: assets.map((asset) => asset) });
 	} catch (error) {
-		console.log("CLOUDINARY ERROR");
-		console.log(error);
+		// eslint-disable-next-line no-console
+		console.error("CLOUDINARY ERROR", error);
 	}
 }

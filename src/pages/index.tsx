@@ -60,7 +60,7 @@ export default function Home() {
 										key={event.title}
 										image={event.image}
 										title={event.title}
-										date={event.date}
+										date={new Date(event.date)}
 										location={event.location}
 										address={event.address}
 										coordinates={event.coordinates}

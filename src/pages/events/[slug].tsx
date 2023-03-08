@@ -77,7 +77,7 @@ const EventAttachmentCard: React.FC<EventAttachment> = ({
 	label,
 	type,
 	author,
-	authorLink,
+	// authorLink,
 	size,
 }) => {
 	const icon = ATTACHMENT_ICONS[type];
@@ -112,7 +112,7 @@ const EventLinkCard: React.FC<EventLink> = ({
 	label,
 	type,
 	author,
-	authorLink,
+	// authorLink,
 }) => {
 	const icon = LINK_ICONS[type];
 
@@ -147,8 +147,8 @@ const Event: NextPage<{
 }> = ({ event, riders }) => {
 	const {
 		data: gallery,
-		error: galleryError,
-		isLoading: isGalleryLoading,
+		// error: galleryError,
+		// isLoading: isGalleryLoading,
 	} = useSwr<{
 		pictures: EventImage[];
 	}>("/api/event/gallery", fetcher);
@@ -240,7 +240,7 @@ const Event: NextPage<{
 							</button>
 						</div>
 						<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-							{(isRidersExtended ? RIDERS : RIDERS.slice(0, 4)).map((rider) => (
+							{(isRidersExtended ? riders : riders.slice(0, 4)).map((rider) => (
 								<RiderCard
 									image={rider.image}
 									name={rider.name}
