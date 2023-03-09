@@ -45,6 +45,12 @@ export const Footer = () => {
 							>
 								Follow us on Instagram
 							</Link>
+							<Link
+								href="mailto:info@italianlongboardcollective.com"
+								target="_blank"
+							>
+								Contact us
+							</Link>
 						</div>
 					</div>
 				</div>

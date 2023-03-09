@@ -20,6 +20,24 @@ export async function getRiders() {
 						equals: "Rider",
 					},
 				},
+				{
+					checkbox: {
+						equals: true,
+					},
+					property: "Active",
+				},
+				{
+					checkbox: {
+						equals: true,
+					},
+					property: "Verified",
+				},
+				{
+					checkbox: {
+						equals: true,
+					},
+					property: "Public",
+				},
 			],
 		},
 		sorts: [
