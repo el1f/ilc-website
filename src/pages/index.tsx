@@ -115,7 +115,7 @@ const Home: NextPage<{
 								longboarding with even more people. These are a few of them.
 							</p>
 
-							<div className="relative flex gap-8 mt-4 flex-nowrap h-[480px]">
+							<div className="relative flex gap-8 mt-4 flex-nowrap h-[560px]">
 								<div className="absolute -left-6 md:-left-16 w-[calc(100vw+48px)] md:w-[calc(((100vw-1152px)/2)+848px)]">
 									<Swiper
 										navigation={{
@@ -162,15 +162,13 @@ const Home: NextPage<{
 										{riders.map((rider) => (
 											<SwiperSlide
 												key={rider.handle}
-												className="!w-auto md:pl-16 pl-6"
+												className="!w-auto md:pl-16 pl-6 pt-8"
 											>
-												<motion.div>
-													<RiderCard
-														image={rider.image}
-														name={rider.name}
-														city={rider.city}
-													/>
-												</motion.div>
+												<RiderCard
+													image={rider.image}
+													name={rider.name}
+													city={rider.city}
+												/>
 											</SwiperSlide>
 										))}
 										<SwiperSlide className="!w-auto md:pl-16 pl-6">
