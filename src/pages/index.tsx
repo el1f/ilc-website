@@ -39,10 +39,10 @@ const Home: NextPage<{
 							introducing italy's finest longboarders
 						</h1>
 						<div className="relative w-full aspect-[320/176] mb-16">
-							<Image src="/assets/ciao.svg" alt="Ciao" fill />
+							<Image src="/assets/ciao.svg" alt="Ciao" fill priority />
 						</div>
 						<div className="relative w-full aspect-[320/164]">
-							<Image src="/assets/heading.svg" alt="Abstract" fill />
+							<Image src="/assets/heading.svg" alt="Abstract" fill priority />
 						</div>
 					</div>
 				</section>

@@ -55,12 +55,13 @@ const Riders: NextPage<{
 				</header>
 
 				<main className="container grid max-w-5xl grid-cols-1 gap-8 mx-auto justify-items-center sm:grid-cols-2 lg:grid-cols-3">
-					{riders.map((rider) => (
+					{riders.map((rider, i) => (
 						// <motion.div>
 						<RiderCard
 							image={rider.image}
 							name={rider.name}
 							city={rider.city}
+							isPriority={i <= 9}
 						/>
 						// </motion.div>
 					))}

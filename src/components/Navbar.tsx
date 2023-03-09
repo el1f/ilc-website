@@ -8,7 +8,13 @@ export const Navbar = () => {
 		<header className="fixed z-10 w-full p-4 md:py-8">
 			<nav className="container z-50 flex items-center content-center justify-between w-full h-20 max-w-4xl px-6 mx-auto font-medium border rounded-full shadow-xl bg-zinc-900 border-zinc-800 md:top-16">
 				<Link className="block w-10 h-10" href="/">
-					<Image src="/brand/logo.svg" alt="logo" height={40} width={40} />
+					<Image
+						src="/brand/logo.svg"
+						alt="logo"
+						height={40}
+						width={40}
+						priority
+					/>
 				</Link>
 
 				<div className="flex items-center gap-4">

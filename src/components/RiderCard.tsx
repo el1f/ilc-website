@@ -13,6 +13,7 @@ interface RiderCardProps {
 	name: string;
 	city: string;
 	dynamic?: boolean;
+	isPriority?: boolean;
 }
 
 export const RiderCard: React.FC<RiderCardProps> = ({
@@ -20,6 +21,7 @@ export const RiderCard: React.FC<RiderCardProps> = ({
 	name,
 	city,
 	dynamic = false,
+	isPriority = false,
 }) => {
 	const { ref: moveRef, x, y } = useMouse();
 	const { ref: sizeRef, width, height } = useElementSize();
@@ -64,6 +66,7 @@ export const RiderCard: React.FC<RiderCardProps> = ({
 						}}
 						width={540}
 						height={675}
+						priority={isPriority}
 					/>
 				</motion.figure>
 			</div>

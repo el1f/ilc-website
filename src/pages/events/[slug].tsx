@@ -184,6 +184,7 @@ const Event: NextPage<{
 								src={event.image}
 								alt={`Cover picture for the event`}
 								fill
+								priority
 							/>
 						</div>
 						<div className="md:py-12">
@@ -241,14 +242,17 @@ const Event: NextPage<{
 							</button>
 						</div>
 						<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-							{(isRidersExtended ? riders : riders.slice(0, 4)).map((rider) => (
-								<RiderCard
-									image={rider.image}
-									name={rider.name}
-									city={rider.city}
-									dynamic
-								/>
-							))}
+							{(isRidersExtended ? riders : riders.slice(0, 4)).map(
+								(rider, i) => (
+									<RiderCard
+										image={rider.image}
+										name={rider.name}
+										city={rider.city}
+										dynamic
+										isPriority={i < 4}
+									/>
+								),
+							)}
 
 							<button
 								className="flex items-center justify-center h-12 gap-2 px-6 font-bold tracking-wide border rounded border-zinc-500 hover:border-zinc-400 text-zinc-500 hover:text-zinc-50 tabular-nums md:hidden"
