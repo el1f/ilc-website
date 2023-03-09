@@ -1,12 +1,16 @@
+import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { event } from "nextjs-google-analytics";
 import React from "react";
 
 import { RiderCard } from "@/components/RiderCard";
-import RIDERS from "@/data/riders";
+import { getRiders } from "@/helpers/notion/getRiders";
+import { Rider } from "@/types/data";
 
-const Riders = () => {
+const Riders: NextPage<{
+	riders: Rider[];
+}> = ({ riders }) => {
 	return (
 		<>
 			<Head>
@@ -51,11 +55,7 @@ const Riders = () => {
 				</header>
 
 				<main className="container grid max-w-5xl grid-cols-1 gap-8 mx-auto justify-items-center sm:grid-cols-2 lg:grid-cols-3">
-					{RIDERS.sort((a, b) =>
-						a.name
-							.toLocaleLowerCase()
-							.localeCompare(b.name.toLocaleLowerCase()),
-					).map((rider) => (
+					{riders.map((rider) => (
 						// <motion.div>
 						<RiderCard
 							image={rider.image}
@@ -68,6 +68,19 @@ const Riders = () => {
 			</div>
 		</>
 	);
+};
+
+export const getStaticProps: GetStaticProps<{
+	riders: Rider[];
+}> = async () => {
+	const riders = await getRiders();
+
+	return {
+		props: {
+			riders,
+		},
+		revalidate: 8 * 60 * 60,
+	};
 };
 
 export default Riders;

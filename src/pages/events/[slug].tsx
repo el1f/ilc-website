@@ -27,6 +27,7 @@ import { RiderCard } from "@/components/RiderCard";
 import EVENTS from "@/data/events";
 import RIDERS from "@/data/riders";
 import { getDirectionsLink } from "@/helpers/getDirectionsLink";
+import { getRiders } from "@/helpers/notion/getRiders";
 import {
 	Event as EventData,
 	EventAttachment,
@@ -468,9 +469,7 @@ const Event: NextPage<{
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const event = EVENTS.filter((event) => event.slug === params?.slug)[0] ?? {};
 
-	const riders = RIDERS.filter((rider) =>
-		event.presentRiders?.includes(rider.handle),
-	);
+	const riders = await getRiders();
 
 	return {
 		props: {

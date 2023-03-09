@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
+import { GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import { CaretLeft, CaretRight } from "phosphor-react";
 import { useRef, useState } from "react";
@@ -12,13 +13,16 @@ import { EventCard } from "@/components/EventCard";
 import { RiderCard } from "@/components/RiderCard";
 import { RiderCardMore } from "@/components/RiderCardMore";
 import EVENTS from "@/data/events";
-import RIDERS from "@/data/riders";
+import { getRiders } from "@/helpers/notion/getRiders";
+import { Rider } from "@/types/data";
 
 const UPCOMING_EVENTS = EVENTS.filter((event) => {
 	return dayjs(event.date).isAfter(dayjs());
 });
 
-export default function Home() {
+const Home: NextPage<{
+	riders: Rider[];
+}> = ({ riders }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const navigationPrevRef = useRef(null);
 	const navigationNextRef = useRef(null);
@@ -155,7 +159,7 @@ export default function Home() {
 											<CaretRight className="w-8 h-8" />
 										</div>
 										<div className="absolute top-0 left-0 z-10 hidden w-16 h-full bg-gradient-to-r from-black to-black/0 md:block" />
-										{RIDERS.map((rider) => (
+										{riders.map((rider) => (
 											<SwiperSlide
 												key={rider.handle}
 												className="!w-auto md:pl-16 pl-6"
@@ -220,4 +224,19 @@ export default function Home() {
 			</main>
 		</>
 	);
-}
+};
+
+export const getStaticProps: GetStaticProps<{
+	riders: Rider[];
+}> = async () => {
+	const riders = await getRiders();
+
+	return {
+		props: {
+			riders,
+		},
+		revalidate: 8 * 60 * 60,
+	};
+};
+
+export default Home;
