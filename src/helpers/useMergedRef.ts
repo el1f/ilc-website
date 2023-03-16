@@ -5,7 +5,7 @@ import React, { useCallback } from "react";
 type Ref<T> = React.Dispatch<React.SetStateAction<T>> | React.ForwardedRef<T>;
 
 export function assignRef<T = any>(
-	ref: React.ForwardedRef<T>,
+	ref: React.ForwardedRef<T> | React.MutableRefObject<T>,
 	value: T | null,
 ) {
 	if (typeof ref === "function") {
@@ -18,7 +18,9 @@ export function assignRef<T = any>(
 
 export function mergeRefs<T = any>(...refs: Ref<T>[]) {
 	return (node: T | null) => {
-		refs.forEach((ref) => assignRef(ref, node));
+		refs.forEach((ref) => {
+			if (typeof ref === "object") assignRef(ref, node);
+		});
 	};
 }
 
